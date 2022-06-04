@@ -154,6 +154,7 @@
   let calendarIdToTitle = {};
   let mutexLinkMenuCalendar_onClick = false;
 
+  //
   async function handleStatus(response, token) {
     if (response.status >= 200 && response.status < 300) {
       return Promise.resolve(response);
@@ -380,8 +381,8 @@
   async function authenticate(interactive) {
     let token = '';
     try {
-      // Strip the scopes.
-      [token] = await chromep.identity.getAuthToken({
+      // Strip the scopes. Does not work in Edge Chromium https://docs.microsoft.com/en-us/microsoft-edge/extensions-chromium/developer-guide/api-support#unsupported-extension-apis
+      [token] = await chromep.identity.launchWebAuthFlow({
         interactive
       });
     } catch (error) {
